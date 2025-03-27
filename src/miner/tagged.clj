@@ -126,6 +126,12 @@ the tag-readers in order returning the first truthy result (or nil if none)."
      (defmethod print-method my.ns.MyRecord [this w]
        (miner.tagged/pr-tagged-record-on this w))"
   [this ^java.io.Writer w]
+  (when (and *print-meta*
+             (instance? clojure.lang.IMeta this)
+             (seq (meta this)))
+    (.write w "^")
+    (print-method (meta this) w)
+    (.write w " "))
   (.write w "#")
   (.write w ^String (tag-string (class this)))
   (.write w " ")
