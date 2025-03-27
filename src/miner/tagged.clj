@@ -10,7 +10,7 @@
 ;; clojure.lang.TaggedLiteral and the `tagged-literal` function.
 
 ;; DEPRECATED
-(defrecord TaggedValue [tag value]
+(defrecord ^:deprecated TaggedValue [tag value]
   Object 
   (toString [x] (pr-str x)))
 
